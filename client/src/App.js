@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
   Link
@@ -18,21 +18,20 @@ import Auth from './hoc/auth';
 
 function App() {
   return (
-     <Router>
-      <div>
-        {
-         
-        }
-        <NavBar />
-        <Switch>
+    <Suspense fallback={(<div>Loading...</div>)}> 
+      <NavBar />
+<div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
+  <BrowserRouter>
+  <Switch>
           <Route exact path="/" component={Auth(LandingPage,null)}/>
           <Route exact path="/login" component={Auth(LoginPage,false)}/>
           <Route exact path="/join" component={Auth(RegisterPage,false)}/>
           <Route exact path="/token" component={Auth(TokenPage,false)}/>
           <Route exact path="/video/upload" component={Auth(VideoUploadPage,true)}/>
-        </Switch>
-      </div>
-    </Router>
+  </Switch>
+  </BrowserRouter>
+</div>
+</Suspense>
   );
 }
 
