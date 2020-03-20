@@ -9,8 +9,5 @@ router.get('/',(req,res)=>{
     res.send('hello')
 })
 
-router.get('/api/hello',(req,res)=>{
-    res.send('안냐세여~~')
-})
 
 module.exports = router;

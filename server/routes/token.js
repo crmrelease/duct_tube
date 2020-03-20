@@ -50,6 +50,7 @@ router.get('/userInfo',verifyToken,async (req,res)=>{
   }
   return res.json({
       code: 200,
+      _id:checkedUser._id,
       isAuth: true,
       info: checkedUser.name,
       isAdmin:checkedUser.role

@@ -3,10 +3,12 @@ const router = express.Router()
 const cors = require('cors');
 //onst video =require('../models/video')
 const multer = require('multer')
-const ffmpeg = require('fluent-ffmpeg');
+//const ffmpeg = require('fluent-ffmpeg');
+const video =require('../models/video')
+
 
 router.use(cors());
-ffmpeg.setFfmpegPath("C:/ffmpeg/ffmpeg-4.2.2-win64-static/bin/ffmpeg.exe")
+//ffmpeg.setFfmpegPath("C:/ffmpeg/ffmpeg-4.2.2-win64-static/bin/ffmpeg.exe")
 let storage = multer.diskStorage({
     destination:(req,file,cb)=>{
         cb(null,'uploads/');
@@ -23,7 +25,24 @@ let storage = multer.diskStorage({
     }
 })
 
-const upload = multer({storage:storage}).single("file");
+let storage_thumbnail = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'upload_thumbnail/');
+    },
+    filename:(req,file,cb)=>{
+        cb(null,`${Date.now()}_${file.originalname}`);
+    },
+    fileFilter:(req,file,cb)=>{
+        const ext = path.extname(file.originalname)
+        if(ext!=='.mp4'){
+            return cb(res.status(400).end('png만 올리세여'),false);
+        }
+        cb(null,true)
+    }
+})
+
+const upload = multer({storage:storage}).single("video_file");
+const upload_thumbnail = multer({storage:storage_thumbnail}).single("thumbnail_file");
 
 router.post('/uploadfile',(req,res)=>{
     upload(req,res,err=>{
@@ -34,36 +53,45 @@ router.post('/uploadfile',(req,res)=>{
     })
 })
 
-router.post("/thumbnail", (req, res) => {
-
-    let thumbsFilePath ="";
-    let fileDuration ="";
-    console.log(req.body)
-
-    ffmpeg.ffprobe(req.body.filePath, function(err, metadata){
-        console.dir(metadata);
-        console.log(metadata.format.duration);
-
-        fileDuration = metadata.format.duration;
+router.post('/thumbnail', (req, res) => {
+    upload_thumbnail(req,res,err=>{
+        if(err){
+            return res.json({success:false,err})
+            }
+        return res.json({success:true, filePath: res.req.file.path, fileName: res.req.file.filename})
     })
 
+});
 
-    ffmpeg(req.body.filePath)
-        .on('filenames', function (filenames) {
-            console.log('Will generate ' + filenames.join(', '))
-            thumbsFilePath = "uploads/thumbnails/" + filenames[0];
-        })
-        .on('end', function () {
-            console.log('Screenshots taken');
-            return res.json({ success: true, thumbsFilePath: thumbsFilePath, fileDuration: fileDuration})
-        })
-        .screenshots({
-            count: 3,
-            folder: 'uploads/thumbnails',
-            size:'320x240',
-            filename:'thumbnail-%b.png'
-        });
+router.post('/uploadvideo', (req, res) => {
+    
+    const uploadVideo = new video(req.body)
+    uploadVideo.save((err,doc)=>{
+        if(err) return res.json({success:false,err})
+        res.status(200).json({success:true})
+    })
+});
 
+
+router.get('/getVideo', (req, res) => {
+    
+    video.find().populate('writer')
+    .exec((err,videos)=>{
+        if(err) return res.status(400).send(err)
+        res.status(200).json({success:true, videos})
+    })
+    
+});
+
+router.post('/getVideoInfo', (req, res) => {
+    
+    video.findOne({"_id":req.body.videoId})
+    .populate('writer')
+    .exec((err,videoDetailInfo)=>{
+        if(err) return res.status(400).send(err)
+        res.status(200).json({success:true, videoDetailInfo})
+    })
+    
 });
 
 module.exports = router;

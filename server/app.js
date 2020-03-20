@@ -7,6 +7,7 @@ const bodyParser= require('body-parser')
 const connect = require('./models')
 const passport = require('passport');
 const cors =require('cors')
+const path = require('path');
 
 const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth');
@@ -45,6 +46,9 @@ app.use(sessionMiddleware);
 app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/server/uploads', express.static('uploads'));
+app.use('/server/upload_thumbnail', express.static('upload_thumbnail'));
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json())

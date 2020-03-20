@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
 import { useSelector } from "react-redux";
-//import { withRouter } from 'react-router-dom';
+import {useHistory} from 'react-router-dom'
 
 function RightMenu(props) {
     const user = useSelector(state => state.user)
@@ -41,5 +41,6 @@ function RightMenu(props) {
     )
   }
 }
+
 
 export default RightMenu;
