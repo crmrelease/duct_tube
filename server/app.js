@@ -14,6 +14,8 @@ const authRouter = require('./routes/auth');
 const tokenRouter = require('./routes/token');
 const videoRouter = require('./routes/video');
 const subscribeRouter = require('./routes/subscribe');
+const commentRouter = require('./routes/comment');
+
 
 
 const passportConfig = require('./passport');
@@ -60,6 +62,7 @@ app.use('/auth',authRouter);
 app.use('/token',tokenRouter);
 app.use('/video',videoRouter);
 app.use('/subscribe',subscribeRouter);
+app.use('/comment',commentRouter)
 
 
 
