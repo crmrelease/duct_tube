@@ -66,7 +66,7 @@ function Subscribe(props){
                 borderRadius: '4px', color: 'white',
                 padding: '10px 16px', fontWeight: '500', fontSize: '1rem', textTransform: 'uppercase'
             }} onClick={onSubscribe} >
-             {subscribeNumber} {subscribedStatus ? '구독하실?' : '구독중'}
+             {subscribeNumber} {subscribedStatus ? '구독ㄱㄱ' : '구독취소ㄱㄱ'}
             </button>
         </div>
     )

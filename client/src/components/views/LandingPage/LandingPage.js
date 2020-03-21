@@ -48,7 +48,7 @@ function LandingPage(props) {
                 }
                 title={video.title}
             />
-            <span>업로드한놈:{video.writer.name} </span><br />
+            <span>비디오 제공자:{video.writer.name} </span><br />
             <span style={{ marginLeft: '3rem' }}> {video.views}</span>
             - <span> {moment(video.createdAt).format("MMM Do YY")} </span>
         </Col>
@@ -59,7 +59,7 @@ function LandingPage(props) {
     return (
         <div>
             <div style={{ width: '85%', margin: '3rem auto' }}>
-            <Title level={2} > 덕질을 위한 추천 비디오 </Title>
+            <Title level={2} > 오늘의 추천 비디오(즐감) </Title>
             <hr />
 
             <Row gutter={16}>

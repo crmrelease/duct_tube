@@ -50,7 +50,7 @@ function Subscription(){
     return(
 
         <div style={{ width: '85%', margin: '3rem auto' }}>
-            <Title level={2} > 당신이 구독하는 비디오 </Title>
+            <Title level={2} > 당신이 구독하는 비디오(즐감) </Title>
             <hr />
 
             <Row gutter={16}>
