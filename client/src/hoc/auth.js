@@ -15,6 +15,7 @@ export default function(SpecificComponent, option, adminRoute=null){
                 props.history.push('/login')
             }
              }    else{
+                 localStorage.setItem('idKey',response.payload._id)
                 if(adminRoute&&!response.payload.isAdmin===0){
                     props.history.push('/')
                 } else{

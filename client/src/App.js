@@ -13,6 +13,7 @@ import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import TokenPage from './components/views/TokenPage/TokenPage';
 import VideoUploadPage from './components/views/videoUploadPage/videoUploadPage';
 import videoDetailPage from './components/views/videoDetailPage/videoDetailPage';
+import Subscription from './components/views/Subscription/Subscription';
 import NavBar from "./components/views/NavBar/NavBar";
 import Auth from './hoc/auth';
 
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/token" component={Auth(TokenPage,false)}/>
           <Route exact path="/videos/:videoId" component={Auth(videoDetailPage,null)}/>
           <Route exact path="/video/upload" component={Auth(VideoUploadPage,true)}/>
+          <Route exact path="/subscription" component={Auth(Subscription,true)}/>
   </Switch>
   </BrowserRouter>
 </div>

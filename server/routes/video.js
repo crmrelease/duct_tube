@@ -5,6 +5,8 @@ const cors = require('cors');
 const multer = require('multer')
 //const ffmpeg = require('fluent-ffmpeg');
 const video =require('../models/video')
+const subscribe =require('../models/subscribe')
+
 
 
 router.use(cors());
@@ -93,5 +95,21 @@ router.post('/getVideoInfo', (req, res) => {
     })
     
 });
+
+router.post('/subvideo',(req,res)=>{
+        subscribe.find({'userFrom':req.body.userFrom}).exec((err,subInfo)=>{
+        if(err) return res.status(400).send(err)
+        let subInfos=[];
+        subInfo.map((key,index)=>{
+            subInfos.push(key.userTo)
+        })
+        video.find({'writer':{$in:subInfos}}).populate('writer').exec((err,subVideo)=>{
+            if(err) return res.status(400).send(err)
+            res.status(200).json({success:true, subVideo})
+    })
+    
+    })
+
+})
 
 module.exports = router;

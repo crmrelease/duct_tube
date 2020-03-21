@@ -5,11 +5,11 @@ const subscribeSchema = mongoose.Schema({
 
     userTo:{
         type:Schema.Types.ObjectId,
-        ref:'user'
+        ref:'user',
     },
     userFrom:{
         type:Schema.Types.ObjectId,
-        ref:'user'
+        ref:'user',
     }
 
 },{timestamps:true})
