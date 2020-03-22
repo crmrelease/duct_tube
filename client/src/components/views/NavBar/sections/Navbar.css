@@ -3,7 +3,7 @@
 .menu {
   padding: 0 15px;
   border-bottom: solid 1px #e8e8e8;
-  overflow: auto;
+  overflow: false;
   box-shadow: 0 0 30px #f3f1f1;
   background-color: white;
 }
@@ -20,7 +20,7 @@
 }
 
 .menu__container .ant-menu-item {
-  padding: 0px 5px;
+  padding: 0px 10px;
 }
 
 .menu__container .ant-menu-submenu-title {
