@@ -15,6 +15,7 @@ const tokenRouter = require('./routes/token');
 const videoRouter = require('./routes/video');
 const subscribeRouter = require('./routes/subscribe');
 const commentRouter = require('./routes/comment');
+const likeRouter = require('./routes/like');
 
 
 
@@ -63,6 +64,8 @@ app.use('/token',tokenRouter);
 app.use('/video',videoRouter);
 app.use('/subscribe',subscribeRouter);
 app.use('/comment',commentRouter)
+app.use('/like',likeRouter)
+
 
 
 

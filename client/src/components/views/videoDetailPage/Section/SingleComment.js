@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useSelector} from 'react-redux';
 import {Comment, Button, Input} from 'antd';
+import LikeDislike from './LikeDislike';
 
 
 function SingleComment(props){
@@ -36,6 +37,7 @@ function SingleComment(props){
     }
 
     const actions =[
+        <LikeDislike comment userId={localStorage.getItem('idKey')} commentId={props.comment._id}/>,
         <span onClick={onClickReply} key="comment-basic-reply-to">댓글달기</span>
     ]
 
