@@ -53,7 +53,9 @@ router.get('/userInfo',verifyToken,async (req,res)=>{
       _id:checkedUser._id,
       isAuth: true,
       info: checkedUser.name,
-      isAdmin:checkedUser.role
+      isAdmin:checkedUser.role,
+      email:checkedUser.email,
+      
       })
   }
   catch{((error) => {

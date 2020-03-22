@@ -38,7 +38,7 @@ function RightMenu(props) {
           <a onClick={logoutHandler}>Logout</a>
         </Menu.Item>
         <Menu.Item key="intro">
-        <a style={{width:'20%'}}>{localStorage.getItem("name")}님 환영합니다</a>
+        <a href="/profile" style={{width:'20%'}}>{localStorage.getItem("name")}님 환영합니다</a>
         </Menu.Item>
       </Menu>
     )
